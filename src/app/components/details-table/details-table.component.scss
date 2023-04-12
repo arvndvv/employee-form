@@ -1,0 +1,9 @@
+.table-overflow {
+  overflow-x: auto;
+  height: 70vh;
+  border: 1px solid #d1d1d1;
+  @apply p-1;
+  &::-webkit-scrollbar{
+    display: none;
+  }
+}

@@ -1,0 +1,12 @@
+.navigation{
+  @apply  flex items-center justify-between w-full bg-blue-500 text-white p-5;
+  &__links-container{
+    @apply flex gap-5;
+  }
+  &__link{
+    @apply cursor-pointer hover:text-blue-200 ease-in-out duration-150;
+  }
+  &__brand{
+    @apply text-2xl;
+  }
+}

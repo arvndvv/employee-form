@@ -1,0 +1,85 @@
+<div class="my-4">
+  <h1 class="lg:text-center text-2xl font-extrabold">Add Employee</h1>
+  <p class="lg:text-center">Add details of employee in the below form inorder to have them listed in our table.</p>
+</div>
+<mat-card class="p-2 lg:w-[65%] mx-auto">
+  <mat-card-header>
+    <h2> Employee Details form</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="formGroup" class="details-form">
+      <!-- id -->
+      <mat-form-field appearance="fill" [ngClass]="{'pointer-events-none select-none opacity-50':(isEditing)}">
+        <mat-label>ID</mat-label>
+        <input matInput type="number" formControlName="id">
+        <mat-error *ngIf="id?.invalid">
+          {{id.errors && id.errors['UniqueIDError'] ? 'Id already exist. Try updating from table.' : 'id is required.'}}
+        </mat-error>
+      </mat-form-field>
+      <!-- name -->
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name" maxlength="50">
+        <mat-error *ngIf="submitAttempted && formGroup.get('name')?.invalid">
+          name is required.
+        </mat-error>
+      </mat-form-field>
+      <!-- dob -->
+      <mat-form-field appearance="fill">
+        <mat-label>Date of birth</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dob">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="submitAttempted && formGroup.get('dob')?.invalid">
+          date of birth is required.
+        </mat-error>
+      </mat-form-field>
+      <!-- email -->
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" formControlName="email"
+          maxlength="50">
+        <mat-error *ngIf="submitAttempted && formGroup.get('email')?.invalid">
+          email is required.
+        </mat-error>
+      </mat-form-field>
+      <!-- phone number -->
+      <mat-form-field appearance="fill">
+        <mat-label>Phone number</mat-label>
+        <input matInput type="number" pattern="[0-9]{10}" formControlName="number" title="10 digit number">
+        <mat-error *ngIf="submitAttempted && formGroup.get('number')?.invalid">
+          phone number is required.
+        </mat-error>
+      </mat-form-field>
+      <!-- Salary -->
+      <mat-form-field appearance="fill">
+        <mat-label>Salary</mat-label>
+        <input matInput type="number" formControlName="salary">
+        <mat-error *ngIf="submitAttempted && formGroup.get('salary')?.invalid">
+          salary is required.
+        </mat-error>
+      </mat-form-field>
+      <!-- Gender -->
+      <div>
+        <label for="genderForm">Gender:</label>
+        <mat-radio-group aria-label="Gender" formControlName="gender" id="genderForm">
+          <mat-radio-button value="male">Male</mat-radio-button>
+          <mat-radio-button value="female">Female</mat-radio-button>
+          <mat-radio-button value="other">Other</mat-radio-button>
+          <mat-error *ngIf="submitAttempted && formGroup.get('gender')?.invalid">
+            gender is required.
+          </mat-error>
+        </mat-radio-group>
+      </div>
+      <div class="justify-between w-full flex">
+        <button type="button" class="border-gray-400 border py-2 px-4 rounded" (click)="clearData()">
+          clear
+        </button>
+        <button type="button" (click)="saveData()" class="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded">
+          {{ (isEditing) ? 'Update' : 'Save'}}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+
+</mat-card>
